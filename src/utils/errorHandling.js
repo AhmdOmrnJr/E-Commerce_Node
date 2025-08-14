@@ -4,7 +4,7 @@ export const asyncHandler = (API) => {
   return (req, res, next) => {
     API(req, res, next).catch((error) => {
       stackVar = error.stack;
-      const statusCode = error.cause || 500;
+      const statusCode = parseInt(error.cause) || 500;
       return next(new Error(error.message, { cause: statusCode }));
     });
   };

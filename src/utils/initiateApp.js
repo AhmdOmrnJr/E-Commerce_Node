@@ -13,6 +13,8 @@ export const initiateApp = (app, express) => {
   app.use(`${baseUrl}/brand`, routers.brandRouter)
   app.use(`${baseUrl}/category`, routers.categoryRouter)
   app.use(`${baseUrl}/subCategory`, routers.subCategoryRouter)
+  app.use(`${baseUrl}/coupon`, routers.couponRouter)
+  app.use(`${baseUrl}/auth`, routers.authRouter)
   
 
   app.use((req, res) => {

@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 
 const subCategorySchema = new Schema(
   {
@@ -33,6 +33,6 @@ const subCategorySchema = new Schema(
 );
 
 const subCategoryModel =
-  model.SubCategory || model("SubCategory", subCategorySchema);
+  mongoose.models.SubCategory || model("SubCategory", subCategorySchema);
 
 export default subCategoryModel;

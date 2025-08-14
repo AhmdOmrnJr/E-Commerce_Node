@@ -1,26 +1,30 @@
 import nodemailer from "nodemailer";
 
-async function sendEmail({ to = '', subject = '', message = '', attachments = [] } = {}) {
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.SENDER_EMAIL, // generated ethereal user
-            pass: process.env.SENDER_PASSWORD, // generated ethereal password
-        },
-    });
-
-    // send mail with defined transport object
-    let info = await transporter.sendMail({
-        from: `"Omran" <${process.env.SENDER_EMAIL}>`, // sender address
-        to,
-        subject,
-        html:message,
-        attachments
-    });
-
-    return info.accepted.length ? false : true
-}
-
-
-
-export default sendEmail
+export const sendEmail = async ({
+  to = "",
+  message = "",
+  subject = "",
+  attachments = [],
+}) => {
+  const transporter = nodemailer.createTransport({
+    host: "localhost", // or smtp.gmail.com
+    port: 587, // or 465 for secured
+    secure: false,
+    service: "gmail", // optional
+    auth: {
+      user: process.env.SENDER_EMAIL,
+      pass: process.env.SENDER_PASSWORD,
+    },
+  });
+  const info = await transporter.sendMail({
+    from: `OMRAN <${process.env.SENDER_EMAIL}>`,
+    to,
+    html: message,
+    subject,
+    attachments,
+  });
+  if (info.accepted.length) {
+    return true;
+  }
+  return false;
+};

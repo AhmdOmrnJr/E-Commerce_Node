@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 
 const categorySchema = new Schema(
   {
@@ -35,6 +35,6 @@ categorySchema.virtual("SubCategories", {
   // justOne: true
 });
 
-const categoryModel = model.Category || model("Category", categorySchema);
+const categoryModel = mongoose.models.Category || model("Category", categorySchema);
 
 export default categoryModel;
